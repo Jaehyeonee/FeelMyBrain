@@ -11,6 +11,7 @@
             border-radius: 2em;
             padding-top: 56.25%;
         }
+       
         button{
             height: 150px;
             width: 150px;
@@ -29,17 +30,12 @@
             height: 150px;
             width: 150px;
             border-radius: 50%;
-            margin:50px auto;
-
+            margin:auto;
             display:block;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             text-decoration: none;
             font-weight: 800;
             transition: 0.25s;
-
-            background-color: #D3D8EF;
-            color: #000000;
-
         }
 
         .w-btn-indigo {
@@ -144,23 +140,33 @@
 </head>
 
 <body onload="createTimeline()">
-
-    
+   
     <canvas id="chart" width="800" height="200"></canvas>
-
-    <div>
-        <input id ="w-btn" type="button" value="공부 시작" class="start-btn" />
-    </div>
+    <button id="w-btn" class ="w-btn-indigo" type="button">공부 시작</button>
 
     <div class="container">
-        <div class="timcon">
-            <h1>Timer</h1>
-        </div>
-        <h1 class="timestamp">00 : 00 : 00</h1>
+            
+        <h1>
+            <span id = "minutes">00</span> :
+            <span id = "seconds">00</span> :
+            <span id = "tenMillis">00</span> 
+        </h1>
+                
     </div>
+<<<<<<< HEAD
+        <script src="./stopwatch.js"></script>
+    
+    
+    <!--
+        <canvas id=”mycanvas” width=”400″ height=”100″></canvas>
+        <script>
+        var line1 = new TimeSeries();
+        var line2 = new TimeSeries();
+=======
     
     <script src ="stopwatch.js"></script>
     
+>>>>>>> jaehyeon_web
 
 </body>
 

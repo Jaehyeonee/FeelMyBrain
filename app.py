@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 
 # DB config
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@127.0.0.1:3306/FeelMyBrain'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@127.0.0.1:5500/FeelMyBrain'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 

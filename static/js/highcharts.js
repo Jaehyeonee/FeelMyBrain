@@ -13,7 +13,7 @@ function requestData() {
         url: '/live-data',
         success: function(point) { // point는  http://127.0.0.1:5000/live-data 의 데이터 전체 의미함
             var series = chart.series[0], // chart 변수에 등록한 첫번째 series 할당
-                shift = series.data.length > 20; // shift if the series is
+                shift = series.data.length > 40; // shift if the series is
                                                  // longer than 20
                                                  // shift라는 변수는 그래프의 점이 20개 이상이 되면 
                                                  // 앞에서 받았던 점을 보이는 부분에서 없애고 
@@ -23,8 +23,8 @@ function requestData() {
             // add the point
             chart.series[0].addPoint(point, true, shift);
 
-            // call it again after one second
-            setTimeout(requestData, 1000);
+            // call it again after 0.5 second
+            setTimeout(requestData, 500);
         },
         cache: false
     });
@@ -32,7 +32,6 @@ function requestData() {
 
 $(document).ready(function() {
     $(".start-btn").click(function(){
-
         chart = new Highcharts.Chart({  // <태그 id='data-container'>에 그래프 그려라!
             chart: {
                 renderTo: 'data-container', // Series가 그래프에 표현되는 모양을 설정
@@ -42,7 +41,7 @@ $(document).ready(function() {
                 }
             },
             title: {
-                text: 'Live random data' // 그래프 상단에 출력되는 그래프 제목
+                text: 'Live Attention Data' // 그래프 상단에 출력되는 그래프 제목
             },
             xAxis: { // X축 디자인 담당
                 type: 'datetime',

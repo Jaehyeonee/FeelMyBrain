@@ -21,9 +21,11 @@ function countTime() {
       ClockPaint();
     }, 10);
   } else if (startBtn.value == "공부 완료" && count != 0) {
+
     clearInterval(timer);
-    startBtn.value = "공부 시작";
-    startBtn.className = "start-btn";
+    location.href='/btn_end'
+    // startBtn.value = "공부 시작";
+    // startBtn.className = "start-btn";
   }
 }
 

@@ -1,36 +1,29 @@
-from flask import Flask, render_template, session, abort, redirect, request, Blueprint, jsonify, g, make_response, url_for
-
-from start_api import start
 # from live_chart_api import live_chart
 import json
-from time import time
 from random import random
+from time import time
+
+from flask import (Blueprint, Flask, abort, g, jsonify, make_response,
+                   redirect, render_template, request, session, url_for)
+
+from start_api import start
 
 # from database import load_list
 app = Flask(__name__)
-
+app.register_blueprint(start)
 
 # DB config
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@127.0.0.1:5500/FeelMyBrain'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@127.0.0.1:5500/FeelMyBrain'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def main():
+    g.start_btn = True
     # 메인 페이지에 들어갔을 시 작동
     return render_template('Main.html')
 
-    # btn 이름 전달
-    # return render_template('Main.html', btn_name=btn_name)
 
-
-@app.route('/live-data')
-def live_data():
-    # Create a PHP array and echo it as JSON
-    data = [time() * 1000, random() * 100]
-    response = make_response(json.dumps(data))
-    response.content_type = 'application/json'
-    return response
 
 if __name__ == "__main__":
     app.run(debug=True)

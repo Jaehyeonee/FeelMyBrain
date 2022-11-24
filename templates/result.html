@@ -12,6 +12,7 @@ avg_music {{avg_music}}
             background-color: aliceblue;
         }
         div{
+            width: 80%;
             background-color: white;
             border: 1px solid white;
             border-radius: 16px;
@@ -37,30 +38,42 @@ avg_music {{avg_music}}
         }
 
         .div1{
+            position: relative;
+            width:60%;
+            height: 0;
+            block-size: 100%;
             text-align: center;
             font-weight: bolder;
             background-color: aquamarine;
+            margin-top: 10px;
+            flex : 1
 
         }
-        .div2{
-            float:left;
-            background-color: antiquewhite;
+        .resultPrintbox{
+            position: relative;
+            width:60%;
+            height: 0;
+            block-size: 100%;
+            text-align: center;
+            font-weight: bolder;
+            background-color: rgb(138, 189, 97);
+            margin-top: 10px;
+            flex : 1;
+            color:#283782 ;
+            
         }
-
-        .div3{
-            float:left;
-            background-color: blueviolet;
-        }
-
         .content{
             margin: 0 auto;
             display:flex;
             flex-wrap: nowrap;
         }
         .content2{
-        
             display: flex;
             flex-wrap: wrap;
+        }
+
+        h3{
+            color:#283782;
         }
     </style>
 
@@ -69,19 +82,36 @@ avg_music {{avg_music}}
 
 <body>
     <h2 style="color:#283782">Feel My Brain</h2>
-    <div class="content">
-        <div class="div1">순집중시간</div>
-        <div class="div1">알람 횟수</div>
-        <div class="div1">평균 음악 볼륨</div>
-        
-        
-    </div>
 
     첫 페이지로 가기
     <input id ="w-btn" type="button" value="처음으로" class="start-btn" onclick="location.href='/'"/>
 
+    <div class="content">
+        <div class="div1">순집중시간
+            <div class="resultPrintbox" style = "margin-top: 10px">
+                {{atten_time}}
+            </div>
+        </div>
 
+
+        <div class="div1">알람 횟수
+            <div class="resultPrintbox" style = "margin-top: 10px">
+                {{num_alarm}}
+            </div>
+        </div>
+
+
+        <div class="div1">평균 음악 볼륨
+            <div class="resultPrintbox" style = "margin-top: 10px">
+                {{avg_music}}
+            </div>
+        </div>
+
+
+    </div>
 </body>
+
+
 
 
 

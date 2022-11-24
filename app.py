@@ -12,9 +12,6 @@ from start_api import start
 app = Flask(__name__)
 app.register_blueprint(start)
 
-# DB config
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@127.0.0.1:5500/FeelMyBrain'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 @app.route('/', methods=['GET', 'POST'])

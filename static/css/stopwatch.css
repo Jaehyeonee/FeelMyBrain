@@ -1,0 +1,42 @@
+* {
+
+        box-sizing: border-box ;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      
+      .timcon{
+        position: relative;
+        float: left;
+        margin-left: 30px;
+       
+      }
+      .container {
+        width: 80%;
+        min-width: 320px;
+        max-width: 640px;
+        margin:0 auto;
+        padding: 5px 0 15px;
+        text-align: center;
+        border: 1px solid white;
+        border-radius: 16px;
+        background-color: white;
+        box-shadow: 0 15px 35px rgb(229, 243, 255);
+      }
+      
+      
+      h2 {
+        color: black;
+      }
+      h1 {
+        color: #283782;
+      }
+      
+      
+      h1 > span {
+        display: inline-block;
+        width: 40px;
+      }
+      

@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <head>
-    <h2>Feel My Brain</h2>
-    <link rel="stylesheet" href="./stopwatch.css" />
+
+    <h2 style="color:#283782">Feel My Brain</h2>
+    <link rel="stylesheet" href="static\css\stopwatch.css" />
     <style>
+        body{
+            background-color: aliceblue;
+        }
+
         .egg_box {
             background-color: bisque;
             width: 60%;
@@ -11,7 +16,6 @@
             border-radius: 2em;
             padding-top: 56.25%;
         }
-       
         button{
             height: 150px;
             width: 150px;
@@ -30,12 +34,15 @@
             height: 150px;
             width: 150px;
             border-radius: 50%;
-            margin:auto;
+            margin:50px auto;
             display:block;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             text-decoration: none;
-            font-weight: 800;
+            font-weight: 1000;
             transition: 0.25s;
+            background-color: #D3D8EF;
+            color: #000000;
+
         }
 
         .w-btn-indigo {
@@ -69,6 +76,7 @@
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5,      #23d5ab);
             color: white;
         }
+    
 
         @keyframes gradient1 {
             0% {
@@ -98,7 +106,7 @@
     </style>
 
 
-    <script type="text/javascript" src="smoothie.js"></script>
+    <script type="text/javascript" src="static\js\smoothie.js"></script>
     <script type="text/javascript">
     var arr;
    
@@ -139,55 +147,37 @@
 
 </head>
 
-<body>
-    <button id="w-btn" class ="w-btn-indigo" type="button" href='/live-data'>공부 시작</button>
+<body onload="createTimeline()">
 
-    <div class="container">
-            
-        <h1>
-            <span id = "minutes">00</span> :
-            <span id = "seconds">00</span> :
-            <span id = "tenMillis">00</span> 
-        </h1>
-                
-    </div>
-        <script src="./stopwatch.js"></script>
-    
-    
-    <!--
-        <canvas id=”mycanvas” width=”400″ height=”100″></canvas>
-        <script>
-        var line1 = new TimeSeries();
-        var line2 = new TimeSeries();
-
-        setInterval(function() {
-            line2.append(new Date().getTime(), Math.random());
-            line1.append(new Date().getTime(), Math.random());
-            }, 1000);
-
-        /  / 스무디 차트 객체에 라인 등록
-            smoothie.addTimeSeries(line1);
-            smoothie.addTimeSeries(line2);
-    </script>
-        
-    -->
-<!-- 여기서부터 -->
-    <!-- 그래프 부분 -->
-    <div class="container-fluid">
-        <!-- Example row of columns -->
-        <div class="row">
-  
-            <div class="container-fluid" id="data-container"></div>
-  
-        </div>
-    </div>
+    <!-- ############# 실시간 그래프 #############-->
+    <div class="container-fluid" id="data-container"></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/highcharts-more.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="/static/js/highcharts.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<!-- 여기까지 jibin 수정함 -->
+    <!-- ############# 실시간 그래프 #############-->
+
+
+
+    
+
+    <!-- <canvas id="chart" width="800" height="200"></canvas> -->
+
+    <div>
+        <input id ="w-btn" type="button" value="공부 시작" class="start-btn" />
+    </div>
+
+    <div class="container">
+        <div class="timcon">
+            <h1>Timer</h1>
+        </div>
+        <h1 class="timestamp">00 : 00 : 00</h1>
+    </div>
+    
+    <script src ="static\js\stopwatch.js"></script>
+    
+
 </body>
 
 

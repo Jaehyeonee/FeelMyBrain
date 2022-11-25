@@ -178,6 +178,25 @@
     <script src ="static\js\stopwatch.js"></script>
     
 
+    <!-- ############################ -->
+    
+    <script>
+        $(".start-btn").click(function(){
+            // window.alert('ajax show'+show)
+            if(show){
+                // show = false;
+                // window.alert('show ajax 실행하자'+show)
+                $.ajax({
+                    // type: "POST",
+                    url: '/ajax',
+                    success: alert('측정을 시작합니다.')                
+                })
+            }else{
+                // window.alert('show ajax 실행 안 함'+show)
+            }
+        })
+    </script>
+
 </body>
 
 

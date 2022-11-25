@@ -3,7 +3,7 @@ import pandas as pd
 import scipy.io
 
 def get_con(time, af7):
-    time = time
+    con_time = time[0]
 
     n = 200  # 신호 길이
     k = np.arange(n)
@@ -17,6 +17,10 @@ def get_con(time, af7):
     Y = np.fft.fft(af7)/n  # af7이 df['AF7'][:200] 형태일 때
     Y = Y[range(int(n/2))]
 
+    # 이 변수들 초기값이 없어서 우선 0으로 해둠
+    theta = 0
+    smr = 0
+    mBeta = 0
 
     # theta
     for i in range(16, 28):
@@ -32,4 +36,4 @@ def get_con(time, af7):
     
     con = (smr + mBeta) / theta
 
-    return (time, con)
+    return (con_time, con)

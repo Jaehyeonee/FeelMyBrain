@@ -30,6 +30,7 @@ function requestData() {
     });
 }
 
+
 $(document).ready(function() {
     $(".start-btn").click(function(){
         chart = new Highcharts.Chart({  // <태그 id='data-container'>에 그래프 그려라!
@@ -41,7 +42,7 @@ $(document).ready(function() {
                 }
             },
             title: {
-                text: 'Live Attention Data' // 그래프 상단에 출력되는 그래프 제목
+                text: 'Live EEG Data' // 그래프 상단에 출력되는 그래프 제목
             },
             xAxis: { // X축 디자인 담당
                 type: 'datetime',
@@ -66,3 +67,12 @@ $(document).ready(function() {
         });
     })
 });
+
+// $(".start-btn").click(function(){
+//     $.ajax({
+//         url: '/ajax',
+//         success: function(data){
+//             alert('성공!')
+//         },
+//     })
+// })

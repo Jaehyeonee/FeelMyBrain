@@ -1,4 +1,5 @@
 from pylsl import StreamInlet, resolve_stream # first resolve an EEG # stream on the lab network
+from time import localtime, time
 
 class lsl_control:
   def __init__(self):
@@ -29,9 +30,10 @@ class lsl_control:
 
       ##########################################################################
       # 나중에 예은이한테 받은 정제한 데이터(집중도 데이터)를 self.data에 집어넣기
-      self.data = sample
-      self.time = timestamp
-      self.timelist.append(self.time, self.data) 
-
-    return 
+      self.data = sample[1]
+      timezone = 60*60*9
+      self.time = (time()+timezone) * 1000
+      self.timelist.append((self.time, self.data)) 
+    inlet.close_stream()
+    return True
     

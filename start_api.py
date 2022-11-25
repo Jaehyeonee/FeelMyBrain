@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, abort, redirect, request, Blu
 import get_data
 import json
 from random import random
-from time import time
+from time import time, ctime
 
 
 start = Blueprint('start', __name__)
@@ -28,6 +28,7 @@ def btn_start():
 # '공부종료' 버튼을 누르면
 def btn_end():
     # 뇌파 측정 종료
+    lsl.state=False
     g.btn_study = False
     atten_time = 10
     num_alarm = 11
@@ -45,9 +46,25 @@ def live_data():
     # Create a PHP array and echo it as JSON
 
     # lsl 실시간 데이터의 마지막 부분 출력
-    # data =lsl.timelist[-1]
-    data = [time() * 1000, random() * 100]  # 이건 샘플
+    
+    # print(lsl.timelist)
+    while len(lsl.timelist) <= 0:
+        pass
+        # print('len(lsl.timelist) <= 0')
+
+    # data = [time() * 1000, lsl.timelist[-1][1]] 
+    data =lsl.timelist[-1]    
+    # print(ctime(data[0]))
+    # data = [time(), lsl.timelist[-1][1]]
+    
+    # print(data)
     response = make_response(json.dumps(data))
     response.content_type = 'application/json'
     print(response)
+    
+    print(data[0])
     return response
+
+@start.route('/ajax', methods=['POST'])
+def ajax():
+    lsl.start_getting_lsl()

@@ -34,7 +34,7 @@ def btn_end():
     lsl.state=False
     # g.btn_study = False
     atten_time = 10
-    num_alarm = 11
+    num_alarm = alarm_cnt
     avg_music = 12
     
     # 리포트 페이지로 이동
@@ -81,6 +81,7 @@ def con_data():
 
     # lsl 실시간 데이터의 마지막 부분 출력
     global lsl
+    global alarm_cnt
     # print(lsl.timelist)
     while len(lsl.timelist) <= 201:
         # print('len(lsl.timelist) <= 0:')
@@ -98,14 +99,14 @@ def con_data():
     ### 아직 구체적으로 알고리즘을 정하지는 않음
     ### flag랑 틀이 필요할 것 같아서 대충 만들어봄
     ########### 알람 울리기 ###########
-    if con_data <= 3:
+    if con_data <= 0.97:  # 약 3.5% 확률
         alarm_cnt += 1 # 지속적으로 집중도가 낮으면 알람 울리기
-        print('알람 울리기!!!!!!!!!!!')
+        # print('알람 울리기!!!!!!!!!!!')
     else:
         alarm_cnt = 0
 
     ########### 음악 볼륨 조절하기 ###########
-    if con_data >= 8:
+    if con_data >= 1.35:  # 약 36% 확률
         music_cnt += 1 # 지속적으로 집중도가 높으면 음악 볼륨 낮추기
         print('음악 볼륨 낮추기!!!!!!!!!!!')
     else:

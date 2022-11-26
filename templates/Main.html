@@ -180,6 +180,14 @@
 
     <!-- ############################ -->
     
+    
+    <script>
+        var audio = new Audio('static/source/alert.mp3');
+    </script>
+
+    <input type="button" id="playAlarm" onclick="audio.play();" value="PLAY">
+    <input type="button" id="pauseAlarm" onclick="audio.pause();" value="PAUSE">
+
     <script>
         $(".start-btn").click(function(){
             // window.alert('ajax show'+show)
@@ -195,6 +203,34 @@
                 // window.alert('show ajax 실행 안 함'+show)
             }
         })
+
+        setInterval(function(){
+            $.ajax({
+                url: '/con-data',
+                type: 'GET',
+                success: function(data) {
+                    if (data <= 0.97) {
+                        $("#playAlarm").trigger('click')  // alarm play 버튼 클릭
+                    }
+                },
+            })
+        }, 1000);
+
+        function request_CON_Data() {
+            $.ajax({
+                url: '/con-data',
+                method: 'get',
+                data: {},
+                success: function(point) { // point는  http://127.0.0.1:5000/live-data 의 데이터 전체 의미함
+                    setTimeout(request_CON_Data, 1000);
+                    // window.alert('집중도 데이터 얻음')
+                },
+                error:function(request,status,error){
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                },
+                cache: false
+            });
+            }
     </script>
 
 </body>

@@ -94,21 +94,28 @@ def con_data():
     
     print('lsl.conlist',lsl.conlist)
 
+    response = make_response(json.dumps(con_data))
+    response.content_type = 'application/json'
+    print(response)
+    
+    print(con_data[0])
+    return response
 
-    ### 아직 구체적으로 알고리즘을 정하지는 않음
-    ### flag랑 틀이 필요할 것 같아서 대충 만들어봄
-    ########### 알람 울리기 ###########
-    if con_data <= 3:
-        alarm_cnt += 1 # 지속적으로 집중도가 낮으면 알람 울리기
-        print('알람 울리기!!!!!!!!!!!')
-    else:
-        alarm_cnt = 0
 
-    ########### 음악 볼륨 조절하기 ###########
-    if con_data >= 8:
-        music_cnt += 1 # 지속적으로 집중도가 높으면 음악 볼륨 낮추기
-        print('음악 볼륨 낮추기!!!!!!!!!!!')
-    else:
-        music_cnt = 0
+    # ### 아직 구체적으로 알고리즘을 정하지는 않음
+    # ### flag랑 틀이 필요할 것 같아서 대충 만들어봄
+    # ########### 알람 울리기 ###########
+    # if con_data <= 3:
+    #     alarm_cnt += 1 # 지속적으로 집중도가 낮으면 알람 울리기
+    #     print('알람 울리기!!!!!!!!!!!')
+    # else:
+    #     alarm_cnt = 0
+
+    # ########### 음악 볼륨 조절하기 ###########
+    # if con_data >= 8:
+    #     music_cnt += 1 # 지속적으로 집중도가 높으면 음악 볼륨 낮추기
+    #     print('음악 볼륨 낮추기!!!!!!!!!!!')
+    # else:
+    #     music_cnt = 0
     
     return jsonify(lsl.conlist)

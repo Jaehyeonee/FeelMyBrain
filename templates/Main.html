@@ -215,22 +215,6 @@
                 },
             })
         }, 1000);
-
-        function request_CON_Data() {
-            $.ajax({
-                url: '/con-data',
-                method: 'get',
-                data: {},
-                success: function(point) { // point는  http://127.0.0.1:5000/live-data 의 데이터 전체 의미함
-                    setTimeout(request_CON_Data, 1000);
-                    // window.alert('집중도 데이터 얻음')
-                },
-                error:function(request,status,error){
-                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                },
-                cache: false
-            });
-            }
     </script>
 
 </body>

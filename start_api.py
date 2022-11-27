@@ -13,13 +13,17 @@ lsl = get_data.lsl_control()
 def btn_start():
     # '공부완료' 버튼으로 바꿔주기
     g.start_btn = False
-    return render_template('Main.html', start_btn=g.start_btn)
+    g.music_play = True
+    return render_template('Main.html', start_btn=g.start_btn, music_play=g.music_play)
+
     # 뇌파 측정 시작
-    # lsl.start_getting_lsl()
+    # lsl.start_g볼etting_lsl()
     
 
     # 뇌파 그래프 실시간으로 전송해주기
-    # 음악 초기 볼륨 크기로 설정 & 재생
+    # 음악 초기 륨 크기로 설정 & 재생
+    
+
     # 특정 기준을 넘으면 알람 울리기
 
     # return redirect('/')

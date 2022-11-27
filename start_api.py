@@ -11,19 +11,19 @@ lsl = get_data.lsl_control()
 music_cnt = 0
 alarm_cnt = 0
 
-# @start.route('/btn_start', methods=['GET', 'POST'])
-# # '공부시작' 버튼을 누르면
-# def btn_start():
-#     # '공부완료' 버튼으로 바꿔주기
-#     g.start_btn = False
-#     return render_template('Main.html', start_btn=g.start_btn)
-#     # 뇌파 측정 시작
-#     # lsl.start_getting_lsl()
+@start.route('/btn_start', methods=['GET', 'POST'])
+# '공부시작' 버튼을 누르면
+def btn_start():
+    # '공부완료' 버튼으로 바꿔주기
+    g.start_btn = False
+    return render_template('Main.html', start_btn=g.start_btn)
+    # 뇌파 측정 시작
+    # lsl.start_getting_lsl()
     
 
-#     # 뇌파 그래프 실시간으로 전송해주기
-#     # 음악 초기 볼륨 크기로 설정 & 재생
-#     # 특정 기준을 넘으면 알람 울리기
+    # 뇌파 그래프 실시간으로 전송해주기
+    # 음악 초기 볼륨 크기로 설정 & 재생
+    # 특정 기준을 넘으면 알람 울리기
 
 #     # return redirect('/')
 
@@ -34,7 +34,7 @@ def btn_end():
     lsl.state=False
     # g.btn_study = False
     atten_time = 10
-    num_alarm = 11
+    num_alarm = alarm_cnt
     avg_music = 12
     
     # 리포트 페이지로 이동
@@ -81,6 +81,7 @@ def con_data():
 
     # lsl 실시간 데이터의 마지막 부분 출력
     global lsl
+    global alarm_cnt
     # print(lsl.timelist)
     while len(lsl.timelist) <= 201:
         # print('len(lsl.timelist) <= 0:')
@@ -101,21 +102,20 @@ def con_data():
     print(con_data[0])
     return response
 
+    ### 아직 구체적으로 알고리즘을 정하지는 않음
+    ### flag랑 틀이 필요할 것 같아서 대충 만들어봄
+    ########### 알람 울리기 ###########
+    if con_data <= 0.97:  # 약 3.5% 확률
+        alarm_cnt += 1 # 지속적으로 집중도가 낮으면 알람 울리기
+        # print('알람 울리기!!!!!!!!!!!')
+    else:
+        alarm_cnt = 0
 
-    # ### 아직 구체적으로 알고리즘을 정하지는 않음
-    # ### flag랑 틀이 필요할 것 같아서 대충 만들어봄
-    # ########### 알람 울리기 ###########
-    # if con_data <= 3:
-    #     alarm_cnt += 1 # 지속적으로 집중도가 낮으면 알람 울리기
-    #     print('알람 울리기!!!!!!!!!!!')
-    # else:
-    #     alarm_cnt = 0
-
-    # ########### 음악 볼륨 조절하기 ###########
-    # if con_data >= 8:
-    #     music_cnt += 1 # 지속적으로 집중도가 높으면 음악 볼륨 낮추기
-    #     print('음악 볼륨 낮추기!!!!!!!!!!!')
-    # else:
-    #     music_cnt = 0
+    ########### 음악 볼륨 조절하기 ###########
+    if con_data >= 1.35:  # 약 36% 확률
+        music_cnt += 1 # 지속적으로 집중도가 높으면 음악 볼륨 낮추기
+        print('음악 볼륨 낮추기!!!!!!!!!!!')
+    else:
+        music_cnt = 0
     
     return jsonify(lsl.conlist)

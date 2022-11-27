@@ -8,13 +8,19 @@
             background-color: aliceblue;
         }
 
-        .egg_box {
-            background-color: bisque;
-            width: 60%;
-            height: 30%;
-            position: relative;
-            border-radius: 2em;
-            padding-top: 56.25%;
+        .music_container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0 15px;
+            text-align: center;
+            border: 1px solid white;
+            border-radius: 16px;
+            background-color: white;
+            box-shadow: 0 15px 35px rgb(229, 243, 255);
+            width: 20%;
+            
         }
         button{
             height: 150px;
@@ -26,6 +32,11 @@
         button:active {
             transform: scale(0.8);
         }
+        .musicplaybtn{
+            background-color: transparent;
+            border-style: hidden;
+        }
+
         #w-btn {
             position: relative;
             border: none;
@@ -149,20 +160,53 @@
 
 <body onload="createTimeline()">
 
-    <!-- ############# 실시간 그래프 #############-->
-    <div class="container-fluid" id="data-container"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="http://code.highcharts.com/highcharts-more.js"></script>
-    <script src="http://code.highcharts.com/modules/exporting.js"></script>
-    <script src="/static/js/highcharts.js"></script>
-    <!-- ############# 실시간 그래프 #############-->
+    <div class ="container_box">
+        <!-- ############# 실시간 그래프 #############-->
+        <div class="container">
+            <div class="container-fluid" id="data-container"></div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script src="http://code.highcharts.com/highcharts.js"></script>
+            <script src="http://code.highcharts.com/highcharts-more.js"></script>
+            <script src="http://code.highcharts.com/modules/exporting.js"></script>
+            <script src="/static/js/highcharts.js"></script>
+        </div>
+        
+        <!-- ############# 실시간 그래프 #############-->
 
 
+
+        
+
+        
+
+        <!--music container-->
+        <script src="static\js\music.js"> </script>
+        <div class="music_container" >
+        
+            
+            <div>
+                <audio id="cmusic" src= "\static\source\music.mp3"></audio>
+            </div>
+            
+
+           <img src = "static\source\cdimg.png" height="50px" width="50px"style="margin-bottom: 20px;" >
+
+           
+            
+            <input type="range" min="1" max="10" id="volume-control">
+
+            <!-- volume 조절 -->
+
+            
+
+            
+
+        </div>
+
+
+    </div>
 
     
-
-    <!-- <canvas id="chart" width="800" height="200"></canvas> -->
 
     <div>
         <input id ="w-btn" type="button" value="공부 시작" class="start-btn" />
@@ -180,6 +224,14 @@
 
     <!-- ############################ -->
     
+    
+    <script>
+        var audio = new Audio('static/source/alert.mp3');
+    </script>
+
+    <input type="button" id="playAlarm" onclick="audio.play();" value="PLAY">
+    <input type="button" id="pauseAlarm" onclick="audio.pause();" value="PAUSE">
+
     <script>
         $(".start-btn").click(function(){
             // window.alert('ajax show'+show)
@@ -195,6 +247,18 @@
                 // window.alert('show ajax 실행 안 함'+show)
             }
         })
+
+        setInterval(function(){
+            $.ajax({
+                url: '/con-data',
+                type: 'GET',
+                success: function(data) {
+                    if (data <= 0.97) {
+                        $("#playAlarm").trigger('click')  // alarm play 버튼 클릭
+                    }
+                },
+            })
+        }, 1000);
     </script>
 
 </body>

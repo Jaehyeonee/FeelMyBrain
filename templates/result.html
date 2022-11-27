@@ -1,9 +1,3 @@
-결과 페이지
-atten_time {{atten_time}}
-num_alarm {{num_alarm}}
-avg_music {{avg_music}}
-<!-- con_list {{con_list}} -->
-
 <!DOCTYPE html>
 
 <head>
@@ -45,7 +39,6 @@ avg_music {{avg_music}}
             block-size: 100%;
             text-align: center;
             font-weight: bolder;
-            background-color: aquamarine;
             margin-top: 10px;
             flex : 1
 
@@ -57,7 +50,6 @@ avg_music {{avg_music}}
             block-size: 100%;
             text-align: center;
             font-weight: bolder;
-            background-color: rgb(138, 189, 97);
             margin-top: 10px;
             flex : 1;
             color:#283782 ;
@@ -67,14 +59,34 @@ avg_music {{avg_music}}
             margin: 0 auto;
             display:flex;
             flex-wrap: nowrap;
+            box-shadow: 0 15px 35px rgb(229, 243, 255);
+
         }
         .content2{
             display: flex;
             flex-wrap: wrap;
         }
 
-        h3{
+        p{
+            font-size: larger;
+            font-weight: 1000;
             color:#283782;
+        }
+        
+        .concentrate{
+            width: 90%;
+            height: 300px;
+            background-color: white;
+            border: 1px solid white;
+            border-radius: 16px;
+            background-color: white;
+            margin:0 auto;
+            padding: 5px 0 15px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgb(229, 243, 255);
+            margin-top: 3%;
+
+
         }
     </style>
 
@@ -85,29 +97,29 @@ avg_music {{avg_music}}
 </head>
 
 <body>
+    <input id ="w-btn" type="button" value="나의 공부 집중도 측정하러 가기" class="start-btn" onclick="location.href='/'"/>
+
     <h2 style="color:#283782">Feel My Brain</h2>
 
-    첫 페이지로 가기
-    <input id ="w-btn" type="button" value="처음으로" class="start-btn" onclick="location.href='/'"/>
 
     <div class="content">
         <div class="div1">순집중시간
             <div class="resultPrintbox" style = "margin-top: 10px">
-                {{atten_time}}
+                <p>{{atten_time}}</p>
             </div>
         </div>
 
 
         <div class="div1">알람 횟수
             <div class="resultPrintbox" style = "margin-top: 10px">
-                {{num_alarm}}
+                <p>{{num_alarm}}</p>
             </div>
         </div>
 
 
         <div class="div1">평균 음악 볼륨
             <div class="resultPrintbox" style = "margin-top: 10px">
-                {{avg_music}}
+                <p>{{avg_music}}</p>
             </div>
         </div>
     </div>
@@ -147,6 +159,8 @@ avg_music {{avg_music}}
         });
     </script>
 </body>
+
+
 
 
 

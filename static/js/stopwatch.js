@@ -2,16 +2,26 @@ const timeStamp = document.querySelector(".timestamp");
 const startBtn = document.querySelector(".start-btn");
 const audio_play = document.querySelector("#cmusic");
 
+
 let minutes = 0; //분
 let seconds = 0; //초
 let milisec = 0; //밀리초
 let count = 0; //시간 세는 변수
 let timer; //setInterval 값을 넣어 나중에 clearInterval하기위한 변수
 
+function audioStart(){
+  if(startBtn.value == "공부시작"){
+
+  }
+}
+
 function countTime() {
   if (startBtn.value == "공부 시작" ) {
     startBtn.value = "공부 완료";
+    
+    // 시작 버튼 클릭 시, 음악 재생
     audio_play.play();
+    
 
     timer = setInterval(function () {
       count += 1;

@@ -177,43 +177,27 @@
 
         
 
-    
+        
 
         <!--music container-->
+        <script src="static\js\music.js"> </script>
         <div class="music_container" >
+        
             
             <div>
                 <audio id="cmusic" src= "\static\source\music.mp3"></audio>
             </div>
             
 
-           <img src = "static\source\cdimg.png" height="50px" width="50px" ></button>
+           <img src = "static\source\cdimg.png" height="50px" width="50px"style="margin-bottom: 20px;" >
+
+           
             
             <input type="range" min="1" max="10" id="volume-control">
 
-            <!-- input type의 seek bar 값으로 volume 조절 -->
+            <!-- volume 조절 -->
 
-            <script>
-                const audio = document.getElementById('cmusic');
-                const audioVolume = document.getElementById('volume-control');
-
-                // const audioPlay = document.getElementById('w-btn');
-
-                // audioPlay.addEventListener("change", function(e){
-
-                //     document.getElementById('cmusic').play()
-                // })
-
-                audioVolume.addEventListener("change", function(e) {
-                    audio.volume = this.value/10;
-                    
-                    // 
-                })
-
-                
-                
-                
-            </script>
+            
 
             
 

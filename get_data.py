@@ -1,9 +1,11 @@
 from pylsl import StreamInlet, resolve_stream # first resolve an EEG # stream on the lab network
+from time import localtime, time
 
 class lsl_control:
   def __init__(self):
     self.state = False
     self.timelist = []
+    self.conlist = []
     self.time = 0
     self.data = 0
   
@@ -22,16 +24,19 @@ class lsl_control:
     
     # 다시 측정할 때 timelist 초기화
     self.timelist = []
+    self.conlist = []
     # state가 True일 때, 계속해서 뇌파 데이터 얻기 (state가 False일 때, 중단)
     while self.state:
     # get a new sample (you can also omit the timestamp part if you're not interested in it)    
       sample, timestamp = inlet.pull_sample()
 
       ##########################################################################
-      # 나중에 예은이한테 받은 정제한 데이터(집중도 데이터)를 self.data에 집어넣기
-      self.data = sample
-      self.time = timestamp
-      self.timelist.append(self.time, self.data) 
-
-    return 
+      
+      self.data = sample[1] # Af7
+      timezone = 60*60*9
+      self.time = (time()+timezone) * 1000
+      self.timelist.append((self.time, self.data)) 
+    inlet.close_stream()
+    print('EEG stream 종료')
+    return self.timelist
     

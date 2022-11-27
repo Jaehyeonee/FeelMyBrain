@@ -1,4 +1,5 @@
 var chart;
+var show;
 
 /**
  * Request data from the server, add it to the graph and set a timeout
@@ -30,27 +31,38 @@ function requestData() {
     });
 }
 
+// 1초에 한 번씩 집중도 데이터 출력하는 코드 작성
+function request_CON_Data() {
+    $.ajax({
+        url: '/con-data',
+        success: function(point) { // point는  http://127.0.0.1:5000/live-data 의 데이터 전체 의미함
+            setTimeout(request_CON_Data, 1000);
+            // window.alert('집중도 데이터 얻음')
+        },
+        error:function(request,status,error){
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        },
+        cache: false
+    });
+}
+
+
+
 $(document).ready(function() {
+    show = true;
     $(".start-btn").click(function(){
-        chart = new Highcharts.Chart({  // <태그 id='data-container'>에 그래프 그려라!
-            chart: {
-                renderTo: 'data-container', // Series가 그래프에 표현되는 모양을 설정
-                defaultSeriesType: 'spline',
-                events: {
-                    load: requestData // requestData라는 Ajax함수로 구현 -> 실시간 업데이트 가능한 그래프 구현
-                }
-            },
-            title: {
-                text: 'Live Attention Data' // 그래프 상단에 출력되는 그래프 제목
-            },
-            xAxis: { // X축 디자인 담당
-                type: 'datetime',
-                tickPixelInterval: 150,
-                maxZoom: 20 * 1000
-            },
-            yAxis: { // Y축 디자인 담당
-                minPadding: 0.2,
-                maxPadding: 0.2,
+        // window.alert('show'+show)
+        if(show){
+            show = false;
+            // window.alert(show)
+            chart = new Highcharts.Chart({  // <태그 id='data-container'>에 그래프 그려라!
+                chart: {
+                    renderTo: 'data-container', // Series가 그래프에 표현되는 모양을 설정
+                    defaultSeriesType: 'spline',
+                    events: {
+                        load: requestData // requestData라는 Ajax함수로 구현 -> 실시간 업데이트 가능한 그래프 구현
+                    }
+                },
                 title: {
                     text: 'Value',
                     margin: 80
@@ -64,8 +76,14 @@ $(document).ready(function() {
             //     data: []
             }]
         });
-
-        
-
     })
 });
+
+// $(".start-btn").click(function(){
+//     $.ajax({
+//         url: '/ajax',
+//         success: function(data){
+//             alert('성공!')
+//         },
+//     })
+// })

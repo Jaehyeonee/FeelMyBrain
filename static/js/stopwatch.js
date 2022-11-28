@@ -19,8 +19,7 @@ function countTime() {
   if (startBtn.value == "공부 시작" ) {
     startBtn.value = "공부 완료";
     
-    // 시작 버튼 클릭 시, 음악 재생
-    audio_play.play();
+
     
 
     timer = setInterval(function () {

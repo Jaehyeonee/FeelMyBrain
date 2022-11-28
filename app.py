@@ -11,7 +11,6 @@ from start_api import start
 # from database import load_list
 app = Flask(__name__)
 app.register_blueprint(start)
-5
 
 
 @app.route('/', methods=['GET', 'POST'])

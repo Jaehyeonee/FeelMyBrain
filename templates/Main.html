@@ -155,7 +155,7 @@
        
         chart.streamTo(document.getElementById("chart"), 1000); //draw
       }
-  </script> -->
+  </script> 
 
 </head>
 
@@ -176,12 +176,12 @@
 
         
         <!--music container-->
-        <script src="static\js\music.js"> </script>
+        <script src="static\js\music.js"></script>
         <div class="music_container" >
         
             
             <div>
-                <audio id="cmusic" src= "\static\source\music.mp3"></audio>
+                <audio id="cmusic" src= "\static\source\music.mp3" loop ></audio>
             </div>
             
 
@@ -193,6 +193,23 @@
 
             <!-- volume 조절 -->
 
+            <script>
+                
+
+                const maudio = document.getElementById('cmusic');
+
+                const audioVolume = document.getElementById('volume-control');
+
+                audioVolume.addEventListener("change", function(e){
+
+                    maudio.volume = this.value/10;
+
+                })
+
+                
+
+
+            </script>
             
 
             
@@ -224,6 +241,7 @@
     <script>
         var audio = new Audio('static/source/alert.mp3');
         
+        
     </script>
 
     <input type="button" id="playAlarm" onclick="audio.play();" value="PLAY">
@@ -242,7 +260,7 @@
                 $.ajax({
                     // type: "POST",
                     url: '/ajax',
-                    // success: alert('측정을 시작합니다.')                
+                    success: alert('공부를 시작하시겠습니까?')
                 })
 
                 setInterval(function(){
@@ -255,7 +273,7 @@
                             // alert('alert에서' + typeof con);
 
                             // if (con > 0)
-                            if (con <= 0.97)
+                            if (con <= 3)
                              {
                                 // alert('띠링');
                                 alert_cnt = alert_cnt + 1;
@@ -265,7 +283,7 @@
                             }
                             if (con >= 1){
                                 con_cnt = con_cnt + 1;
-                                alert('con_cnt' + con_cnt);
+                                // alert('con_cnt' + con_cnt);
                             }
                         },
                         // error:function(request,status,error){
@@ -283,8 +301,21 @@
                             con = data[1];
                             // alert('/music에서 success');
                             // alert('music에서' + typeof con);
-            
-                            volume_control(con)
+                            
+                            if(con <= 4)
+                            {
+                                audioVolume.value = 10;
+                            }
+                            else if (con >= 2.35){
+                                audioVolume.value = 1;
+                            }
+                            else{
+                                audioVolume.value = 5;
+                            }
+                            
+
+
+                            //volume_control(con)
                             // alert('music 조절 데이터를 얻었습니다.') 
                         },
                         // error:function(request,status,error){
@@ -292,7 +323,8 @@
                         // }, 
                         // error: alert('실패: music 음악 조절 데이터 얻지 못함')
                     })
-                }, 1000);                
+                }, 1000);     
+                audio_play.play();           
 
             }else{
 

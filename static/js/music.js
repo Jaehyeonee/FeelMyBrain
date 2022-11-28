@@ -4,12 +4,12 @@ const audioSet = document.querySelector("#volume-control");
 
 
 function volume_control(con){
-    audioVolume.addEventListener("change", function(e) {
-        audio.volume = this.value/10;
+    audioSet.addEventListener("change", function(e) {
+        audio_volume.volume = this.value/10;
     })
 
 
-    audio_volume.volume = 0.5;
+    audio_volume.volume = 0.1;
     // 집중도 척도 
     
 

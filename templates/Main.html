@@ -273,12 +273,12 @@
                             // alert('alert에서' + typeof con);
 
                             // if (con > 0)
-                            if (con <= 3)
+                            if (con <= 2.5)
                              {
                                 // alert('띠링');
                                 alert_cnt = alert_cnt + 1;
     
-                                alert('alert_cnt' + alert_cnt);
+                                // alert('alert_cnt' + alert_cnt);
                                 $("#playAlarm").trigger('click')  // alarm play 버튼 클릭
                             }
                             if (con >= 1){
@@ -302,16 +302,34 @@
                             // alert('/music에서 success');
                             // alert('music에서' + typeof con);
                             
-                            if(con <= 4)
+                            if(con <= 1.95)
                             {
                                 audioVolume.value = 10;
+                                music_cnt += 1;
+                                music_sum += 10;
+                                
+                                
+
+
                             }
                             else if (con >= 2.35){
                                 audioVolume.value = 1;
+                                music_cnt += 1;
+                                music_sum += 1;
+                                
                             }
                             else{
                                 audioVolume.value = 5;
+                                music_cnt += 1;
+                                music_sum += 5;
+                                
                             }
+
+                            audioVolume.addEventListener("change", function(e){
+                                maudio.volume = this.value/10;
+                            })
+                            
+
                             
 
 
@@ -331,8 +349,8 @@
                 var postdata = {
                     'con_cnt':con_cnt, 'alert_cnt':alert_cnt, 'music_cnt':music_cnt, 'music_sum':music_sum
                 };
-                alert('{con_cnt:'+ con_cnt+ ', alert_cnt: ' + alert_cnt+ ', music_cnt: '+ music_cnt+ ', music_sum: '+ music_sum+'}')
-                alert(JSON.stringify(postdata));
+                // alert('{con_cnt:'+ con_cnt+ ', alert_cnt: ' + alert_cnt+ ', music_cnt: '+ music_cnt+ ', music_sum: '+ music_sum+'}')
+                // alert(JSON.stringify(postdata));
                 $.ajax({
                     type: "POST",
                     contentType: 'application/json',

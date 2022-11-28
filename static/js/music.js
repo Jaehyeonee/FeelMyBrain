@@ -11,6 +11,7 @@ function volume_control(con){
 
     audio_volume.volume = 0.5;
     // 집중도 척도 
+    
 
     // 집중도 낮을 때 -> 볼륨 up
     if(con <= 1.97 ){  

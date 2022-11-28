@@ -50,7 +50,7 @@ function request_CON_Data() {
             // window.alert('집중도 데이터 얻음')
         },
         error:function(request,status,error){
-            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            alert("request_CON_Data code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         },
         cache: false
     });

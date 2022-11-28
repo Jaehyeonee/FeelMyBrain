@@ -11,14 +11,14 @@ lsl = get_data.lsl_control()
 music_cnt = 0
 alarm_cnt = 0
 
-@start.route('/btn_start', methods=['GET', 'POST'])
-# '공부시작' 버튼을 누르면
-def btn_start():
-    # '공부완료' 버튼으로 바꿔주기
-    g.start_btn = False
-    return render_template('Main.html', start_btn=g.start_btn)
-    # 뇌파 측정 시작
-    # lsl.start_getting_lsl()
+# @start.route('/btn_start', methods=['GET', 'POST'])
+# # '공부시작' 버튼을 누르면
+# def btn_start():
+#     # '공부완료' 버튼으로 바꿔주기
+#     g.start_btn = False
+#     return render_template('Main.html', start_btn=g.start_btn)
+#     # 뇌파 측정 시작
+#     # lsl.start_getting_lsl()
     
 
     # 뇌파 그래프 실시간으로 전송해주기
@@ -30,12 +30,22 @@ def btn_start():
 @start.route('/btn_end', methods=['GET', 'POST'])
 # '공부종료' 버튼을 누르면
 def btn_end():
+    result = request.get_json()
+    print(result)
+    data = request.get_json()
+    print(data)
+
     # 뇌파 측정 종료
     lsl.state=False
     # g.btn_study = False
-    atten_time = 10
-    num_alarm = alarm_cnt
-    avg_music = 12
+    atten_time = result['con_cnt']
+    num_alarm = result['alert_cnt']
+    music_cnt = result['music_cnt']
+    music_sum = result['music_sum']
+    if music_cnt == 0:
+        avg_music = 0
+    else:
+        avg_music = music_sum / music_cnt
     
     # 리포트 페이지로 이동
     return render_template('result.html', atten_time=atten_time, num_alarm=num_alarm, avg_music=avg_music, con_list=lsl.conlist)
@@ -93,8 +103,15 @@ def con_data():
     con_data = list(analyze.get_con(data[:,0], data[:,1]))
     lsl.conlist.append(con_data) # 집중도를 리스트에 담아두기
     
-    print('lsl.conlist',lsl.conlist)
+    # print('lsl.conlist',lsl.conlist)
 
+
+    response = make_response(json.dumps(con_data))
+    response.content_type = 'application/json'
+    print(response)
+    
+    # print(con_data[0])
+    return response
 
     ### 아직 구체적으로 알고리즘을 정하지는 않음
     ### flag랑 틀이 필요할 것 같아서 대충 만들어봄
@@ -113,3 +130,21 @@ def con_data():
         music_cnt = 0
     
     return jsonify(lsl.conlist)
+
+@start.route('/alert')
+def alert():
+    print('###########alert 실행############')
+    data =lsl.conlist[-1]
+    response = make_response(json.dumps(data))
+    response.content_type = 'application/json'
+    print(response)
+    return response
+
+@start.route('/music')
+def music():
+    print('###########music 실행############')
+    data =lsl.conlist[-1]
+    response = make_response(json.dumps(data))
+    response.content_type = 'application/json'
+    print(response)
+    return response

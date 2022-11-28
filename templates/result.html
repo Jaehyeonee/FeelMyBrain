@@ -90,6 +90,9 @@
         }
     </style>
 
+    <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
 
 </head>
 
@@ -119,14 +122,42 @@
                 <p>{{avg_music}}</p>
             </div>
         </div>
-
-
     </div>
+    <div id="result_graph" class="chart" style="height: 45vh; width: 100vw"></div>
 
-
-    <div class="concentrate">
-        최종 집중 그래프
-    </div>
+    <script>
+        $(document).ready(function() {
+            $('#result_graph').highcharts({
+                chart: {
+                    renderTo: 'data-container_result', // Series가 그래프에 표현되는 모양을 설정
+                    defaultSeriesType: 'spline',
+                },
+                title: {
+                    text: 'Concentration Level Graph' // 그래프 상단에 출력되는 그래프 제목
+                },
+                xAxis: { // X축 디자인 담당
+                    type: 'datetime',
+                    // tickPixelInterval: 150,
+                    // maxZoom: 20 * 1000
+                },
+                yAxis: { // Y축 디자인 담당
+                    minPadding: 0.2,
+                    maxPadding: 0.2,
+                    title: {
+                        text: 'Value',
+                        margin: 80
+                    }
+                },
+                series: [{  // 이 필드에 제대로 등록되어야 그래프에 점과 선으로 잘 나타남
+                    name: 'Concentration data',
+                    data: {{con_list}}
+                // }, {
+                //     name: 'Conc data', // 여러 선으로 표현하고 싶으면 주석 해제하면 됨
+                //     data: []
+                }]
+            });
+        });
+    </script>
 </body>
 
 
